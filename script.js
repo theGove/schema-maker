@@ -1,4 +1,4 @@
-const deploymentId = "AKfycbweNmrgebSMBW85RxEZ92fgKnSSptJtl9CSqtWqf8bXvUAaNXMhyz_qWuxIs556zn9Cog"
+const deploymentId = "AKfycbyVl3_uGstYeGhrULI-tdU8MIVpjZ8cRCcV-9JigRqOfjaYajSkG7CqGxy9vr_d3o_l"
 const gasUrl=`https://script.google.com/macros/s/${deploymentId}/exec`
 const margin=3// half the width of hte relationship clickable area
 const clicks = []
@@ -20,8 +20,8 @@ async function init(){
 
 function imageClick(evt) {
     console.log(evt)
-    console.log(evt.clientX)
-    console.log( evt.clientY)
+    console.log(evt.offsetX)
+    console.log( evt.offsetY)
     console.log('------')
     const coords1=[]
     const coords2=[]
@@ -31,7 +31,7 @@ function imageClick(evt) {
         clicks.length = 0
     }
     
-    clicks.push(evt.clientX, evt.clientY)
+    clicks.push(evt.offsetX, evt.offsetY)
     
     console.log(clicks)
     if (type==="tables" && clicks.length>2) {
