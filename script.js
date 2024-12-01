@@ -1,6 +1,6 @@
-const deploymentId = "AKfycbyVl3_uGstYeGhrULI-tdU8MIVpjZ8cRCcV-9JigRqOfjaYajSkG7CqGxy9vr_d3o_l"
+const deploymentId = "AKfycbxjgUmyX1SopkEBXr1IoQ_VXxegusZtNxxyIhdZEbVdj1hEmpFMUr4V5R9sLUSo0g-9"
 const gasUrl=`https://script.google.com/macros/s/${deploymentId}/exec`
-const margin=3// half the width of hte relationship clickable area
+const margin=5// half the width of hte relationship clickable area
 const clicks = []
 const tags = []
 const ids = [] 
@@ -26,6 +26,7 @@ function imageClick(evt) {
     const coords1=[]
     const coords2=[]
 
+    
 
     if (evt.shiftKey === true){
         clicks.length = 0
@@ -42,8 +43,21 @@ function imageClick(evt) {
         clicks.length = 0
     }
 
+    if (evt.ctrlKey === true && clicks.length===4) {
+        //rectangular relationship
+        tag(ids[currentIndex]).dataset.shape="rect"
+        tag(ids[currentIndex]).value=clicks.join(',')
+        currentIndex++
+        tag(ids[currentIndex]).focus()
+        clicks.length = 0
+        return
+    }
+
     if (evt.ctrlKey === true) {
         //relatoinships
+
+
+
         const flip={N:"S",S:"N",E:"W",W:"E",}
         const ords=[]
         for(let x=0;x<clicks.length;x=x+2){
@@ -210,14 +224,17 @@ function imageClick(evt) {
 async function submit(){
   console.log("Submitting")
   const coords={}
+  const shapes={}
   for(const id of ids){
     if(tag(id).value.length>0){
-      coords[id]=tag(id).value
+        coords[id]=tag(id).value
+        shapes[id]=tag(id).dataset.shape
+
     }  
   }
   console.log("coords", coords)
 
-  const jsonPayload={mode:"record-coords",data:coords,type,schema, debug:true}
+  const jsonPayload={mode:"record-coords",data:coords,shapes,type,schema, debug:true}
 
     // mode must be specified in the jsonPayload
     console.log("jsonPayload",jsonPayload)
@@ -282,7 +299,7 @@ async function getWork(){
         for(const rel of response){
             ids.push(rel)
             const rels=rel.split("-")
-            html.push(`<tr><td align="right">${rels[0]}</td><td><input id="${rel}"></td><td>${rels[1]}</td></tr>`)
+            html.push(`<tr><td align="right">${rels[0]}</td><td><input data-shape="poly" id="${rel}"></td><td>${rels[1]}</td></tr>`)
         }
         html.push(`<tr><td colspan="3" align="right"><button onclick="submit()">Submit</button></td></tr>`)
     }
