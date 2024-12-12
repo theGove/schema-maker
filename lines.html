@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+  <canvas id="myCanvas"></canvas>
+  <script>
+    var canvas = document.body.querySelector("#myCanvas");
+    var ctx = canvas.getContext('2d');
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    var canvasWidth = canvas.width;
+    var canvasHeight = canvas.height;
+
+function drawLine (X1, Y1, X2, Y2){
+  ctx.save();
+  ctx.beginPath();
+  //ctx.translate(canvasWidth/2, canvasHeight/2)
+  ctx.moveTo(X1, Y1);
+  ctx.lineTo(X2, Y2);
+  ctx.stroke();
+  ctx.restore();
+}
+function drawPoly(aoc){
+  for(let x=0;x<aoc.length-2;x=x+2){
+    drawLine(aoc[x],aoc[x+1],aoc[x+2],aoc[x+3])
+  }        
+  //drawLine(aoc[0],aoc[1],aoc[aoc.length-2],aoc[aoc.length-1])
+}
+//drawPoly([1719,445,1920,445,1910,259,1996,249,1996,259,1920,259,1910,435,1719,435])
+drawPoly([1719,429,1897,419,1906,251,1996,249,1996,264,1927,267,1924,454,1721,455])
+  </script>
+</body>
+</html>

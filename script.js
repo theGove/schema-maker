@@ -110,16 +110,17 @@ function imageClick(evt) {
         console.log("coords1",coords1)
         console.log("coords2",coords2)
         
-
+        console.log("clicks", clicks)
    
-        tag(ids[currentIndex++]).value=coords1.join(',') + "," + coords2.join(',')
+        //tag(ids[currentIndex++]).value=coords1.join(',') + "," + coords2.join(',')
+        tag(ids[currentIndex++]).value=clicks.join(',')
 
         tag(ids[currentIndex]).focus()
 
         clicks.length = 0
     }
 
-    // alt key will make into look goof enough for excel
+    // alt key will make into look good enough for excel
 
     
     // used for first ord
@@ -151,8 +152,6 @@ function imageClick(evt) {
     
     // used for  ords after first but not the last
     function clickToCoord3(x,y,move){
-
-
         let x1 = x
         let y1 = y
         let x2 = x
@@ -170,6 +169,8 @@ function imageClick(evt) {
         }else{
             y1=y-margin
             y2=y+margin
+            x1 = x
+            x2 = x
         }
 
         coords1.push(x1,y1)
