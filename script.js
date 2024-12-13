@@ -1,3 +1,4 @@
+// example call: https://thegove.github.io/schema-maker/index.html?type=tables&schema=Northwind
 const deploymentId = "AKfycbxjgUmyX1SopkEBXr1IoQ_VXxegusZtNxxyIhdZEbVdj1hEmpFMUr4V5R9sLUSo0g-9"
 const gasUrl=`https://script.google.com/macros/s/${deploymentId}/exec`
 const margin=5// half the width of hte relationship clickable area
